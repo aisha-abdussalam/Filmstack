@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/addMovie.css">
+</head>
+
+<body>
+    <!-- Drawer Overlay -->
+    <div class="backdrop" id="backdrop"></div>
+
+    <!-- Slide-over Drawer -->
+    <div class="drawer" id="drawer">
+        <div class="drawer-header">
+            <div class="drawer-title">Add New Movie</div>
+            <button class="close-btn" data-media-type="banani-button" id="closeBtn">
+                <div style="
+                    width: 24px;
+                    height: 24px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  ">
+                    <iconify-icon icon="lucide:x" style="font-size: 24px; color: currentColor"></iconify-icon>
+                </div>
+            </button>
+        </div>
+
+        <form id="addMovieForm">
+            <div class="drawer-content">
+                <div class="poster-upload">
+                    <div class="poster-preview">
+                        <img src="https://images.unsplash.com/photo-1594908900066-3f47337549d8?q=80&w=300&auto=format&fit=crop" alt="Poster Preview" id="imagePreview" />
+                        <div style="
+                                position: absolute;
+                                inset: 0;
+                                background: rgba(0, 0, 0, 0.4);
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                opacity: 0;
+                                transition: opacity 0.2s;
+                                cursor: pointer;
+                            " onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+                            <div style="
+                                width: 24px;
+                                height: 24px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                ">
+                                <iconify-icon icon="lucide:refresh-cw"
+                                    style="font-size: 24px; color: white"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="upload-area" data-media-type="banani-button" id="imageDiv">
+                        <div style="
+                                width: 24px;
+                                height: 24px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-bottom: 12px;
+                            ">
+                            <iconify-icon icon="lucide:image-plus"
+                                style="font-size: 24px; color: var(--text-muted)"></iconify-icon>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 500">Upload Movie Poster</span>
+                        <span style="font-size: 12px; opacity: 0.6; margin-top: 4px">Drop image or click to
+                            browse</span>
+                    </div>
+                </div>
+
+                <!-- Form Fields -->
+                <div class="form-group">
+                    <label class="form-label">Movie Title</label>
+                    <input type="text" class="form-input" id="title" placeholder="e.g. The Godfather" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Overview</label>
+                    <textarea class="form-input form-textarea" id="overview"
+                        placeholder="Short synopsis of the movie"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1">
+                        <label class="form-label">Release Year</label>
+                        <input type="text" class="form-input" id="releaseYear" placeholder="2010" />
+                    </div>
+                    <div class="form-group" style="flex: 1">
+                        <label class="form-label">Runtime (minutes)</label>
+                        <input type="text" class="form-input" id="runtime" placeholder="148" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Genres</label>
+                    <div class="genre-pills" id="genreContainer">
+                        <button type="button" class="genre-pill" data-media-type="banani-button" data-genre="Sci-Fi">
+                            Sci-Fi
+                        </button>
+                        <button type="button" class="genre-pill" data-media-type="banani-button" data-genre="Action">
+                            Action
+                        </button>
+                        <button type="button" class="genre-pill" data-media-type="banani-button" data-genre="Drama">
+                            Drama
+                        </button>
+                        <button type="button" class="genre-pill" data-media-type="banani-button" data-genre="Comedy">
+                            Comedy
+                        </button>
+                        <button type="button" class="genre-pill" data-media-type="banani-button" data-genre="Thriller">
+                            Thriller
+                        </button>
+                        <button type="button" class="genre-pill" data-media-type="banani-button" data-genre="Horror">
+                            Horror
+                        </button>
+                        <button type="button" class="genre-pill" data-media-type="banani-button" data-genre="Mystery">
+                            Mystery
+                        </button>
+                        <button type="button" class="genre-pill" data-media-type="banani-button" data-genre="Adventure">
+                            Adventure
+                        </button>
+                        <button type="button" class="genre-pill" data-media-type="banani-button" data-genre="Fantasy">
+                            Fantasy
+                        </button>
+                        <button type="button" class="genre-pill" data-media-type="banani-button"
+                            data-genre="Documentary">
+                            Documentary
+                        </button>
+                        <button type="button" class="genre-pill" data-media-type="banani-button" data-genre="Crime">
+                            Crime
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Rating</label>
+                    <div id="ratingDiv"></div>
+                </div>
+            </div>
+        </form>
+
+        <div id="errorMessage" class="text-danger small mb-3" style="display: none;"></div>
+        <div class="drawer-footer">
+            <button class="btn btn-secondary" data-media-type="banani-button" onclick="back()">
+                Cancel
+            </button>
+            <button class="btn btn-primary btn-add-movie" id="addMovieButton" data-media-type="banani-button">
+                Add Movie
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FilmStack Dashboard</title>
+    <link rel="stylesheet" href="../css/register.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&family=Geist:wght@100;200;300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:wght@200;300;400;500;600;700;800;900&family=PT+Serif:wght@400;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&family=Shantell+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <div class="signup-container">
+            <div class="brand-header">
+                <div class="logo-wrapper">
+                    <div style="
+                        width: 24px;
+                        height: 24px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                      ">
+                        <iconify-icon icon="lucide:film" style="font-size: 24px; color: white"></iconify-icon>
+                    </div>
+                </div>
+                <div class="app-name">FilmStack</div>
+                <div class="subtitle">Create your personal movie collection</div>
+            </div>
+        
+            <div class="input-group">
+                <div class="field">
+                    <div class="label">Full Name</div>
+                    <div class="input-wrapper">
+                        <div class="input-icon">
+                            <div style="
+                            width: 18px;
+                            height: 18px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                          ">
+                                <iconify-icon icon="lucide:user" style="font-size: 18px; color: currentColor"></iconify-icon>
+                            </div>
+                        </div>
+                        <input type="text" class="input" id="name" placeholder="e.g. Alex Chen"
+                            data-media-type="banani-button" />
+                    </div>
+                </div>
+        
+                <div class="field">
+                    <div class="label">Email Address</div>
+                    <div class="input-wrapper">
+                        <div class="input-icon">
+                            <div style="
+                            width: 18px;
+                            height: 18px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                          ">
+                                <iconify-icon icon="lucide:mail" style="font-size: 18px; color: currentColor"></iconify-icon>
+                            </div>
+                        </div>
+                        <input type="email" class="input" id="email" placeholder="name@example.com"
+                            data-media-type="banani-button" />
+                    </div>
+                </div>
+        
+                <div class="field">
+                    <div class="label">Password</div>
+                    <div class="input-wrapper">
+                        <div class="input-icon">
+                            <div style="
+                            width: 18px;
+                            height: 18px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                          ">
+                                <iconify-icon icon="lucide:lock" style="font-size: 18px; color: currentColor"></iconify-icon>
+                            </div>
+                        </div>
+                        <input type="password" class="input" id="password" placeholder="Create a strong password"
+                            data-media-type="banani-button" />
+                    </div>
+                </div>
+        
+                <div id="errorMessage" class="text-danger small mb-3" style="display: none;"></div>
+                <div class="cta-button" id="registrationButton" data-media-type="banani-button">
+                    Get Started
+                    <div style="
+                        width: 18px;
+                        height: 18px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                      ">
+                        <iconify-icon icon="lucide:arrow-right" style="font-size: 18px; color: currentColor"></iconify-icon>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="divider">
+                <div class="line"></div>
+                <span>or continue with</span>
+                <div class="line"></div>
+            </div>
+        
+            <div class="social-login">
+                <div class="social-btn" data-media-type="banani-button">
+                    <div style="
+                        width: 18px;
+                        height: 18px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                      ">
+                        <iconify-icon icon="lucide:chrome" style="font-size: 18px; color: currentColor"></iconify-icon>
+                    </div>
+                    Google
+                </div>
+                <div class="social-btn" data-media-type="banani-button">
+                    <div style="
+                        width: 18px;
+                        height: 18px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                      ">
+                        <iconify-icon icon="lucide:apple" style="font-size: 18px; color: currentColor"></iconify-icon>
+                    </div>
+                    Apple
+                </div>
+            </div>
+        
+            <div class="footer-text">
+                Already have an account?
+                <span class="link" data-media-type="banani-button">Log in</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <script src="../script/register.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,671 @@
+<div class="export-wrapper" style="
+    width: 1440px;
+    min-height: 812px;
+    position: relative;
+    font-family: var(--font-family-body);
+    background-color: var(--background);
+  ">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&family=Geist:wght@100;200;300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:wght@200;300;400;500;600;700;800;900&family=PT+Serif:wght@400;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&family=Shantell+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FilmStack Dashboard</title>
+        <style>
+            :root {
+                --glass-border: 1px solid color-mix(in srgb, var(--border), transparent 80%);
+                --glass-bg: color-mix(in srgb, var(--card), transparent 30%);
+                --glass-sidebar: color-mix(in srgb, var(--sidebar), transparent 10%);
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            .export-wrapper {
+                margin: 0;
+                padding: 0;
+                background-color: var(--background);
+                color: var(--foreground);
+                font-family: var(--font-family-body);
+                overflow: hidden;
+            }
+        </style>
+        <style id="layout-styles">
+            .app-container {
+                display: flex;
+                height: 100vh;
+                width: 100%;
+                background-image:
+                    radial-gradient(circle at 10% 20%,
+                        color-mix(in srgb, var(--primary), transparent 90%) 0%,
+                        transparent 40%),
+                    radial-gradient(circle at 90% 80%,
+                        color-mix(in srgb, var(--accent), transparent 90%) 0%,
+                        transparent 40%);
+            }
+
+            .sidebar {
+                width: 260px;
+                background-color: var(--glass-sidebar);
+                border-right: var(--glass-border);
+                display: flex;
+                flex-direction: column;
+                padding: 24px;
+                backdrop-filter: blur(12px);
+                flex-shrink: 0;
+            }
+
+            .main-content {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .top-bar {
+                height: 80px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 40px;
+                border-bottom: var(--glass-border);
+                background-color: color-mix(in srgb,
+                        var(--background),
+                        transparent 20%);
+                backdrop-filter: blur(8px);
+                z-index: 10;
+            }
+
+            .content-area {
+                flex: 1;
+                display: flex;
+                overflow: hidden;
+                padding: 0;
+            }
+
+            .filter-panel {
+                width: 240px;
+                padding: 32px 24px;
+                border-right: var(--glass-border);
+                overflow-y: auto;
+                background-color: color-mix(in srgb,
+                        var(--background),
+                        transparent 50%);
+            }
+
+            .grid-container {
+                flex: 1;
+                padding: 32px 40px;
+                overflow-y: auto;
+            }
+        </style>
+        <style id="component-styles">
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-size: 20px;
+                font-weight: 700;
+                color: var(--foreground);
+                margin-bottom: 48px;
+                letter-spacing: -0.5px;
+            }
+
+            .nav-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 16px;
+                border-radius: var(--radius-md);
+                color: var(--muted-foreground);
+                font-size: 14px;
+                font-weight: 500;
+                margin-bottom: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+
+            .nav-item:hover {
+                background-color: color-mix(in srgb,
+                        var(--secondary),
+                        transparent 50%);
+                color: var(--foreground);
+            }
+
+            .nav-item.active {
+                background-color: var(--primary);
+                color: var(--primary-foreground);
+            }
+
+            .search-container {
+                display: flex;
+                align-items: center;
+                background-color: var(--input);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-xl);
+                padding: 8px 16px;
+                width: 380px;
+            }
+
+            .search-input {
+                background: transparent;
+                border: none;
+                outline: none;
+                color: var(--foreground);
+                margin-left: 10px;
+                width: 100%;
+                font-size: 14px;
+            }
+
+            .user-profile {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .filter-group {
+                margin-bottom: 32px;
+            }
+
+            .filter-title {
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: var(--muted-foreground);
+                font-weight: 600;
+                margin-bottom: 16px;
+            }
+
+            .checkbox-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 12px;
+                cursor: pointer;
+                font-size: 14px;
+                color: var(--foreground);
+            }
+
+            .custom-checkbox {
+                width: 18px;
+                height: 18px;
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: 0.2s;
+            }
+
+            .checkbox-item.checked .custom-checkbox {
+                background-color: var(--primary);
+                border-color: var(--primary);
+            }
+
+            .movie-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 32px;
+            }
+
+            .movie-card {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                group: hover;
+                cursor: pointer;
+            }
+
+            .poster-wrapper {
+                position: relative;
+                aspect-ratio: 2/3;
+                border-radius: var(--radius-lg);
+                overflow: hidden;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                border: 1px solid transparent;
+                transition: transform 0.2s;
+            }
+
+            .poster-wrapper:hover {
+                transform: translateY(-4px);
+                border-color: var(--primary);
+            }
+
+            .poster-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .movie-info {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .movie-title {
+                font-size: 15px;
+                font-weight: 600;
+                color: var(--foreground);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .movie-meta {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .movie-year {
+                font-size: 13px;
+                color: var(--muted-foreground);
+            }
+
+            .creator-badge {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                background-color: var(--secondary);
+                padding: 4px 8px;
+                border-radius: var(--radius-xl);
+                font-size: 11px;
+                color: var(--secondary-foreground);
+            }
+
+            .section-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 24px;
+            }
+
+            .section-title {
+                font-size: 24px;
+                font-weight: 700;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="app-container">
+            <!-- Sidebar Navigation -->
+            <div class="sidebar">
+                <div class="logo">
+                    <div style="
+                width: 32px;
+                height: 32px;
+                background: var(--primary);
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+              ">
+                        <iconify-icon icon="lucide:film" style="font-size: 20px"></iconify-icon>
+                    </div>
+                    FilmStack
+                </div>
+
+                <div class="nav-item active" data-media-type="banani-button">
+                    <div style="
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                        <iconify-icon icon="lucide:compass" style="font-size: 20px"></iconify-icon>
+                    </div>
+                    Browse
+                </div>
+                <div class="nav-item" data-media-type="banani-button">
+                    <div style="
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                        <iconify-icon icon="lucide:library" style="font-size: 20px"></iconify-icon>
+                    </div>
+                    My Movies
+                </div>
+                <div class="nav-item" data-media-type="banani-button">
+                    <div style="
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                        <iconify-icon icon="lucide:heart" style="font-size: 20px"></iconify-icon>
+                    </div>
+                    Favorites
+                </div>
+                <div class="nav-item" data-media-type="banani-button">
+                    <div style="
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                        <iconify-icon icon="lucide:users" style="font-size: 20px"></iconify-icon>
+                    </div>
+                    Community
+                </div>
+
+                <div style="flex: 1"></div>
+
+                <div class="nav-item" data-media-type="banani-button">
+                    <div style="
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                        <iconify-icon icon="lucide:settings" style="font-size: 20px"></iconify-icon>
+                    </div>
+                    Settings
+                </div>
+                <div class="nav-item" data-media-type="banani-button">
+                    <div style="
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                        <iconify-icon icon="lucide:log-out" style="font-size: 20px"></iconify-icon>
+                    </div>
+                    Log Out
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Top Bar -->
+                <div class="top-bar">
+                    <div class="search-container">
+                        <iconify-icon icon="lucide:search"
+                            style="font-size: 18px; color: var(--muted-foreground)"></iconify-icon>
+                        <input type="text" class="search-input" placeholder="Search movies, directors, actors..." />
+                    </div>
+
+                    <div class="user-profile">
+                        <div style="
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  overflow: hidden;
+                  border: 2px solid var(--border);
+                ">
+                            <img src="https://storage.googleapis.com/banani-avatars/avatar%2Fmale%2F25-35%2FSouth%20Asian%2F3"
+                                alt="User" style="width: 100%; height: 100%; object-fit: cover" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Body -->
+                <div class="content-area">
+                    <!-- Filter Panel -->
+                    <div class="filter-panel">
+                        <div class="filter-group">
+                            <div class="filter-title">Genres</div>
+                            <div class="checkbox-item checked" data-media-type="banani-button">
+                                <div class="custom-checkbox">
+                                    <iconify-icon icon="lucide:check"
+                                        style="font-size: 12px; color: white"></iconify-icon>
+                                </div>
+                                Sci-Fi
+                            </div>
+                            <div class="checkbox-item" data-media-type="banani-button">
+                                <div class="custom-checkbox"></div>
+                                Action
+                            </div>
+                            <div class="checkbox-item" data-media-type="banani-button">
+                                <div class="custom-checkbox"></div>
+                                Drama
+                            </div>
+                            <div class="checkbox-item checked" data-media-type="banani-button">
+                                <div class="custom-checkbox">
+                                    <iconify-icon icon="lucide:check"
+                                        style="font-size: 12px; color: white"></iconify-icon>
+                                </div>
+                                Thriller
+                            </div>
+                            <div class="checkbox-item" data-media-type="banani-button">
+                                <div class="custom-checkbox"></div>
+                                Comedy
+                            </div>
+                            <div class="checkbox-item" data-media-type="banani-button">
+                                <div class="custom-checkbox"></div>
+                                Horror
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <div class="filter-title">Year</div>
+                            <div class="checkbox-item checked" data-media-type="banani-button">
+                                <div class="custom-checkbox">
+                                    <iconify-icon icon="lucide:check"
+                                        style="font-size: 12px; color: white"></iconify-icon>
+                                </div>
+                                2020s
+                            </div>
+                            <div class="checkbox-item" data-media-type="banani-button">
+                                <div class="custom-checkbox"></div>
+                                2010s
+                            </div>
+                            <div class="checkbox-item" data-media-type="banani-button">
+                                <div class="custom-checkbox"></div>
+                                2000s
+                            </div>
+                            <div class="checkbox-item" data-media-type="banani-button">
+                                <div class="custom-checkbox"></div>
+                                1990s
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <div class="filter-title">Sort By</div>
+                            <div style="
+                    font-size: 14px;
+                    color: var(--foreground);
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 8px 12px;
+                    background: var(--secondary);
+                    border-radius: var(--radius-md);
+                    cursor: pointer;
+                  " data-media-type="banani-button">
+                                Latest Added
+                                <iconify-icon icon="lucide:chevron-down" style="font-size: 16px"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movie Grid -->
+                    <div class="grid-container">
+                        <div class="section-header">
+                            <div class="section-title">Discover Movies</div>
+                            <div style="font-size: 14px; color: var(--muted-foreground)">
+                                Showing 24 results
+                            </div>
+                        </div>
+
+                        <div class="movie-grid">
+                            <!-- Card 1 -->
+                            <div class="movie-card" data-media-type="banani-button">
+                                <div class="poster-wrapper">
+                                    <img src="https://storage.googleapis.com/banani-generated-images/generated-images/b502ef07-d809-4782-90eb-abd451462891.jpg"
+                                        data-aspect-ratio="2:3" data-query="sci-fi movie poster dark neon purple"
+                                        class="poster-image" alt="Movie Poster" />
+                                </div>
+                                <div class="movie-info">
+                                    <div class="movie-title">Neon Horizon</div>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">2024</span>
+                                        <div class="creator-badge">
+                                            <img src="https://storage.googleapis.com/banani-avatars/avatar%2Ffemale%2F25-35%2FEast%20Asian%2F1"
+                                                style="width: 16px; height: 16px; border-radius: 50%" alt="User" />
+                                            <span>Sarah L.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="movie-card" data-media-type="banani-button">
+                                <div class="poster-wrapper">
+                                    <img src="https://storage.googleapis.com/banani-generated-images/generated-images/78f4f67a-0b82-4ef6-83f5-a67d5342bf77.jpg"
+                                        data-aspect-ratio="2:3"
+                                        data-query="cyberpunk thriller movie poster red and black" class="poster-image"
+                                        alt="Movie Poster" />
+                                </div>
+                                <div class="movie-info">
+                                    <div class="movie-title">The Glitch Protocol</div>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">2023</span>
+                                        <div class="creator-badge">
+                                            <img src="https://storage.googleapis.com/banani-avatars/avatar%2Fmale%2F18-25%2FAfrican%2F4"
+                                                style="width: 16px; height: 16px; border-radius: 50%" alt="User" />
+                                            <span>Marcus T.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="movie-card" data-media-type="banani-button">
+                                <div class="poster-wrapper">
+                                    <img src="https://storage.googleapis.com/banani-generated-images/generated-images/9b462cc4-3a8f-4a54-8fb8-1fd67c4f05b4.jpg"
+                                        data-aspect-ratio="2:3" data-query="dramatic space movie poster blue"
+                                        class="poster-image" alt="Movie Poster" />
+                                </div>
+                                <div class="movie-info">
+                                    <div class="movie-title">Silent Orbit</div>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">2021</span>
+                                        <div class="creator-badge">
+                                            <img src="https://storage.googleapis.com/banani-avatars/avatar%2Ffemale%2F35-50%2FEuropean%2F2"
+                                                style="width: 16px; height: 16px; border-radius: 50%" alt="User" />
+                                            <span>Elena R.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 4 -->
+                            <div class="movie-card" data-media-type="banani-button">
+                                <div class="poster-wrapper">
+                                    <img src="https://storage.googleapis.com/banani-generated-images/generated-images/3a3c306e-f5a4-49da-8668-ed4417fc7e45.jpg"
+                                        data-aspect-ratio="2:3" data-query="abstract indie movie poster pastel"
+                                        class="poster-image" alt="Movie Poster" />
+                                </div>
+                                <div class="movie-info">
+                                    <div class="movie-title">Paper Dreams</div>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">2022</span>
+                                        <div class="creator-badge">
+                                            <img src="https://storage.googleapis.com/banani-avatars/avatar%2Fmale%2F35-50%2FHispanic%2F1"
+                                                style="width: 16px; height: 16px; border-radius: 50%" alt="User" />
+                                            <span>Javier M.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 5 -->
+                            <div class="movie-card" data-media-type="banani-button">
+                                <div class="poster-wrapper">
+                                    <img src="https://storage.googleapis.com/banani-generated-images/generated-images/05aa9378-6420-46d7-8e71-966491adefa5.jpg"
+                                        data-aspect-ratio="2:3" data-query="minimalist horror movie poster dark"
+                                        class="poster-image" alt="Movie Poster" />
+                                </div>
+                                <div class="movie-info">
+                                    <div class="movie-title">Echoes in the Dark</div>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">2023</span>
+                                        <div class="creator-badge">
+                                            <img src="https://storage.googleapis.com/banani-avatars/avatar%2Ffemale%2F18-25%2FSouth%20Asian%2F5"
+                                                style="width: 16px; height: 16px; border-radius: 50%" alt="User" />
+                                            <span>Priya K.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 6 -->
+                            <div class="movie-card" data-media-type="banani-button">
+                                <div class="poster-wrapper">
+                                    <img src="https://storage.googleapis.com/banani-generated-images/generated-images/c3f5ba70-eecc-4ca5-8323-0c25184bc1ca.jpg"
+                                        data-aspect-ratio="2:3" data-query="vintage retro comedy movie poster"
+                                        class="poster-image" alt="Movie Poster" />
+                                </div>
+                                <div class="movie-info">
+                                    <div class="movie-title">Summer of '85</div>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">1985</span>
+                                        <div class="creator-badge">
+                                            <img src="https://storage.googleapis.com/banani-avatars/avatar%2Fmale%2F50-65%2FNorth%20American%2F1"
+                                                style="width: 16px; height: 16px; border-radius: 50%" alt="User" />
+                                            <span>Bill D.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    </html>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <style>
+        :root {
+            --background: #0b0f14;
+            --foreground: #e6eef6;
+            --border: #ffffff1f;
+            --input: #0f141a;
+            --primary: #9b5cff;
+            --primary-foreground: #ffffff;
+            --secondary: #1b1f26;
+            --secondary-foreground: #cfe5ff;
+            --muted: #101319;
+            --muted-foreground: #98a4b2;
+            --success: #16a34a;
+            --success-foreground: #ffffff;
+            --accent: #ff6a3d;
+            --accent-foreground: #ffffff;
+            --destructive: #e02424;
+            --destructive-foreground: #ffffff;
+            --warning: #f59e0b;
+            --warning-foreground: #1a1200;
+            --card: #0f1620;
+            --card-foreground: #e6eef6;
+            --sidebar: #091018;
+            --sidebar-foreground: #bfd8ff;
+            --sidebar-primary: #1a0f2a;
+            --sidebar-primary-foreground: #ffd9ff;
+            --radius-sm: 4px;
+            --radius-md: 6px;
+            --radius-lg: 8px;
+            --radius-xl: 12px;
+            --font-family-body: Inter;
+        }
+    </style>
+</div>

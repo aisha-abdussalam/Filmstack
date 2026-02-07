@@ -1,0 +1,688 @@
+<div class="export-wrapper" style="
+    width: 1440px;
+    min-height: 812px;
+    position: relative;
+    font-family: var(--font-family-body);
+    background-color: var(--background);
+  ">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&family=Geist:wght@100;200;300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:wght@200;300;400;500;600;700;800;900&family=PT+Serif:wght@400;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&family=Shantell+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=1440, initial-scale=1.0" />
+        <title>FilmStack - User Profile</title>
+        <style id="theme-styles">
+            :root {
+                --bg-dark: #0a0a0c;
+                --glass-surface: rgba(255, 255, 255, 0.03);
+                --glass-border: rgba(255, 255, 255, 0.08);
+                --glass-highlight: rgba(255, 255, 255, 0.1);
+                --accent-purple: #8b5cf6;
+                --accent-glow: rgba(139, 92, 246, 0.3);
+                --text-main: #ffffff;
+                --text-muted: #a1a1aa;
+                --destructive: #ef4444;
+                --success: #10b981;
+                --input-bg: rgba(0, 0, 0, 0.3);
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            .export-wrapper {
+                margin: 0;
+                padding: 0;
+                background-color: var(--bg-dark);
+                color: var(--text-main);
+                font-family: var(--font-family-body, sans-serif);
+                height: 100vh;
+                overflow: hidden;
+                display: flex;
+            }
+
+            .ambient-glow {
+                position: absolute;
+                width: 600px;
+                height: 600px;
+                background: radial-gradient(circle,
+                        var(--accent-glow) 0%,
+                        transparent 70%);
+                top: -100px;
+                left: -100px;
+                pointer-events: none;
+                z-index: 0;
+                opacity: 0.5;
+            }
+
+            .ambient-glow-2 {
+                position: absolute;
+                width: 500px;
+                height: 500px;
+                background: radial-gradient(circle,
+                        rgba(236, 72, 153, 0.2) 0%,
+                        transparent 70%);
+                bottom: -100px;
+                right: -100px;
+                pointer-events: none;
+                z-index: 0;
+                opacity: 0.5;
+            }
+        </style>
+
+        <style id="sidebar-styles">
+            .sidebar {
+                width: 280px;
+                height: 100%;
+                background: var(--glass-surface);
+                border-right: 1px solid var(--glass-border);
+                backdrop-filter: blur(20px);
+                display: flex;
+                flex-direction: column;
+                padding: 32px 24px;
+                z-index: 10;
+                position: relative;
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-size: 20px;
+                font-weight: 700;
+                letter-spacing: -0.5px;
+                color: var(--text-main);
+                margin-bottom: 48px;
+            }
+
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                background: linear-gradient(135deg, var(--accent-purple), #ec4899);
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+            }
+
+            .nav-section {
+                margin-bottom: 40px;
+            }
+
+            .nav-label {
+                font-size: 12px;
+                text-transform: uppercase;
+                color: var(--text-muted);
+                font-weight: 600;
+                letter-spacing: 1px;
+                margin-bottom: 16px;
+            }
+
+            .nav-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 16px;
+                border-radius: 12px;
+                color: var(--text-muted);
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                margin-bottom: 4px;
+            }
+
+            .nav-item.active {
+                background: var(--glass-highlight);
+                color: var(--text-main);
+            }
+
+            .nav-item:hover {
+                background: rgba(255, 255, 255, 0.05);
+                color: var(--text-main);
+            }
+
+            .genre-list {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .genre-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-size: 14px;
+                color: var(--text-muted);
+                cursor: pointer;
+            }
+
+            .checkbox {
+                width: 18px;
+                height: 18px;
+                border: 2px solid var(--glass-border);
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s;
+            }
+
+            .genre-item.checked .checkbox {
+                background: var(--accent-purple);
+                border-color: var(--accent-purple);
+            }
+        </style>
+
+        <style id="main-content-styles">
+            .main-content {
+                flex: 1;
+                height: 100%;
+                overflow-y: auto;
+                position: relative;
+                z-index: 1;
+                padding: 32px 48px;
+            }
+
+            .top-bar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 48px;
+            }
+
+            .search-container {
+                position: relative;
+                width: 400px;
+            }
+
+            .search-icon {
+                position: absolute;
+                left: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--text-muted);
+                pointer-events: none;
+            }
+
+            .search-input {
+                width: 100%;
+                background: var(--glass-surface);
+                border: 1px solid var(--glass-border);
+                padding: 14px 14px 14px 48px;
+                border-radius: 50px;
+                color: var(--text-main);
+                font-size: 14px;
+                backdrop-filter: blur(10px);
+                outline: none;
+            }
+
+            .user-actions {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+            }
+
+            .user-profile {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                cursor: pointer;
+            }
+
+            .avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 2px solid var(--glass-border);
+            }
+        </style>
+
+        <style id="profile-styles">
+            .profile-header {
+                display: flex;
+                align-items: flex-end;
+                gap: 32px;
+                padding-bottom: 40px;
+                border-bottom: 1px solid var(--glass-border);
+                margin-bottom: 40px;
+            }
+
+            .profile-avatar-large {
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 4px solid var(--glass-surface);
+                box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            }
+
+            .profile-info {
+                flex: 1;
+            }
+
+            .profile-name {
+                font-size: 32px;
+                font-weight: 700;
+                color: var(--text-main);
+                margin: 0 0 8px 0;
+            }
+
+            .profile-meta {
+                display: flex;
+                gap: 16px;
+                color: var(--text-muted);
+                font-size: 14px;
+                align-items: center;
+            }
+
+            .pro-badge {
+                background: linear-gradient(135deg, var(--accent-purple), #ec4899);
+                color: white;
+                padding: 4px 10px;
+                border-radius: 20px;
+                font-size: 11px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 24px;
+                margin-bottom: 48px;
+            }
+
+            .stat-card {
+                background: var(--glass-surface);
+                border: 1px solid var(--glass-border);
+                padding: 24px;
+                border-radius: 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .stat-value {
+                font-size: 28px;
+                font-weight: 700;
+                color: var(--text-main);
+            }
+
+            .stat-label {
+                font-size: 13px;
+                color: var(--text-muted);
+                font-weight: 500;
+            }
+
+            .settings-section {
+                margin-bottom: 40px;
+            }
+
+            .settings-title {
+                font-size: 18px;
+                font-weight: 600;
+                color: var(--text-main);
+                margin-bottom: 24px;
+            }
+
+            .settings-form {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+                max-width: 800px;
+            }
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .form-label {
+                font-size: 13px;
+                font-weight: 500;
+                color: var(--text-muted);
+            }
+
+            .form-input {
+                background: var(--input-bg);
+                border: 1px solid var(--glass-border);
+                border-radius: 8px;
+                padding: 12px 16px;
+                color: var(--text-main);
+                font-size: 14px;
+                outline: none;
+                transition: border-color 0.2s;
+            }
+
+            .form-input:focus {
+                border-color: var(--accent-purple);
+            }
+
+            .btn {
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .btn-secondary {
+                background: transparent;
+                border: 1px solid var(--glass-border);
+                color: var(--text-main);
+            }
+
+            .btn-primary {
+                background: var(--accent-purple);
+                border: 1px solid var(--accent-purple);
+                color: white;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="ambient-glow"></div>
+        <div class="ambient-glow-2"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo" data-media-type="banani-button">
+                <div class="logo-icon">
+                    <div style="
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                        <iconify-icon icon="lucide:film" style="font-size: 20px; color: white"></iconify-icon>
+                    </div>
+                </div>
+                FilmStack
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-label">Menu</div>
+                <div class="nav-item" data-media-type="banani-button">
+                    <div style="
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                        <iconify-icon icon="lucide:layout-grid"
+                            style="font-size: 20px; color: currentColor"></iconify-icon>
+                    </div>
+                    Browse
+                </div>
+                <div class="nav-item" data-media-type="banani-button">
+                    <div style="
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                        <iconify-icon icon="lucide:library" style="font-size: 20px; color: currentColor"></iconify-icon>
+                    </div>
+                    My Movies
+                </div>
+                <div class="nav-item" data-media-type="banani-button">
+                    <div style="
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                        <iconify-icon icon="lucide:heart" style="font-size: 20px; color: currentColor"></iconify-icon>
+                    </div>
+                    Favorites
+                </div>
+                <div class="nav-item" data-media-type="banani-button">
+                    <div style="
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                        <iconify-icon icon="lucide:clock" style="font-size: 20px; color: currentColor"></iconify-icon>
+                    </div>
+                    Watch Later
+                </div>
+            </div>
+
+            <div class="nav-section" style="flex: 1">
+                <div class="nav-label">Genres</div>
+                <div class="genre-list">
+                    <div class="genre-item" data-media-type="banani-button">
+                        <div class="checkbox"></div>
+                        Action
+                    </div>
+                    <div class="genre-item" data-media-type="banani-button">
+                        <div class="checkbox"></div>
+                        Comedy
+                    </div>
+                    <div class="genre-item" data-media-type="banani-button">
+                        <div class="checkbox"></div>
+                        Sci-Fi
+                    </div>
+                    <div class="genre-item" data-media-type="banani-button">
+                        <div class="checkbox"></div>
+                        Drama
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-item active" data-media-type="banani-button">
+                <div style="
+              width: 20px;
+              height: 20px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            ">
+                    <iconify-icon icon="lucide:settings" style="font-size: 20px; color: currentColor"></iconify-icon>
+                </div>
+                Settings
+            </div>
+
+            <button class="btn btn-secondary" style="
+            margin-top: 16px;
+            width: 100%;
+            justify-content: center;
+            border-color: var(--destructive);
+            color: var(--destructive);
+          " data-media-type="banani-button">
+                <div style="
+              width: 16px;
+              height: 16px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 6px;
+            ">
+                    <iconify-icon icon="lucide:log-out" style="font-size: 16px; color: currentColor"></iconify-icon>
+                </div>
+                Log Out
+            </button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-container">
+                    <div class="search-icon">
+                        <div style="
+                  width: 20px;
+                  height: 20px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                ">
+                            <iconify-icon icon="lucide:search"
+                                style="font-size: 20px; color: currentColor"></iconify-icon>
+                        </div>
+                    </div>
+                    <input type="text" class="search-input" placeholder="Search collection..." />
+                </div>
+
+                <div class="user-actions">
+                    <div class="user-profile" data-media-type="banani-button">
+                        <div style="text-align: right">
+                            <div style="font-size: 14px; font-weight: 600; color: white">
+                                Alex Chen
+                            </div>
+                            <div style="font-size: 12px; color: var(--text-muted)">
+                                Pro Member
+                            </div>
+                        </div>
+                        <img src="https://storage.googleapis.com/banani-avatars/avatar%2Fmale%2F25-35%2FEast%20Asian%2F1"
+                            class="avatar" alt="User" />
+                    </div>
+                </div>
+            </header>
+
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <img src="https://storage.googleapis.com/banani-avatars/avatar%2Fmale%2F25-35%2FEast%20Asian%2F1"
+                    class="profile-avatar-large" alt="Alex Chen" />
+                <div class="profile-info">
+                    <h1 class="profile-name">Alex Chen</h1>
+                    <div class="profile-meta">
+                        <span>@alxchen_film</span>
+                        <span>•</span>
+                        <span>Joined October 2021</span>
+                        <span class="pro-badge">
+                            <iconify-icon icon="lucide:zap" style="font-size: 12px"></iconify-icon>
+                            PRO
+                        </span>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" data-media-type="banani-button">
+                    <div style="
+                width: 16px;
+                height: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                        <iconify-icon icon="lucide:share-2" style="font-size: 16px"></iconify-icon>
+                    </div>
+                    Share Profile
+                </button>
+                <button class="btn btn-primary" data-media-type="banani-button">
+                    Edit Profile
+                </button>
+                <button class="btn btn-secondary" style="border-color: var(--destructive); color: var(--destructive)"
+                    data-media-type="banani-button">
+                    <div style="
+                width: 16px;
+                height: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 6px;
+              ">
+                        <iconify-icon icon="lucide:log-out" style="font-size: 16px; color: currentColor"></iconify-icon>
+                    </div>
+                    Log Out
+                </button>
+            </div>
+
+            <!-- Bio Section -->
+            <section class="settings-section" id="profile-bio-section">
+                <h2 class="settings-title">Bio</h2>
+                <div style="
+              max-width: 800px;
+              background: var(--glass-surface);
+              border: 1px solid var(--glass-border);
+              border-radius: 12px;
+              padding: 20px 24px;
+              font-size: 14px;
+              color: var(--text-muted);
+              line-height: 1.6;
+            ">
+                    Lifelong cinephile with a soft spot for meticulously crafted sound
+                    design and non-linear storytelling. Mostly logging rewatches,
+                    festival finds, and late-night sci-fi marathons.
+                </div>
+            </section>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">1,248</div>
+                    <div class="stat-label">Movies Watched</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">43</div>
+                    <div class="stat-label">Lists Created</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">182</div>
+                    <div class="stat-label">Reviews Written</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">342h</div>
+                    <div class="stat-label">Total Watch Time</div>
+                </div>
+            </div>
+        </main>
+    </body>
+
+    </html>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <style>
+        :root {
+            --background: #0b0f14;
+            --foreground: #e6eef3;
+            --border: #ffffff26;
+            --input: #0f1620;
+            --primary: #8a2be2;
+            --primary-foreground: #ffffff;
+            --secondary: #ff6a3d;
+            --secondary-foreground: #121212;
+            --muted: #1a2230;
+            --muted-foreground: #9fb0c4;
+            --success: #16c784;
+            --success-foreground: #02120a;
+            --accent: #a855f7;
+            --accent-foreground: #ffffff;
+            --destructive: #ff5c6c;
+            --destructive-foreground: #1b0a0d;
+            --warning: #f5a524;
+            --warning-foreground: #231500;
+            --card: #0e141a;
+            --card-foreground: #daeaf6;
+            --sidebar: #071018;
+            --sidebar-foreground: #9cc3df;
+            --sidebar-primary: #111826;
+            --sidebar-primary-foreground: #ffffff;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 10px;
+            --radius-xl: 16px;
+            --font-family-body: Inter;
+        }
+    </style>
+</div>

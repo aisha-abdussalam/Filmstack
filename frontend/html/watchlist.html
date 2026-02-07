@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FilmStack Dashboard</title>
+    <link rel="stylesheet" href="../css/watchlist.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <div class="ambient-glow"></div>
+        <div class="ambient-glow-2"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar"></aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="toast-alert" id="toastAlert" data-media-type="banani-button" style="display: none;">
+                <div class="toast-icon">
+                    <div style="
+                                                                            width: 16px;
+                                                                            height: 16px;
+                                                                            display: flex;
+                                                                            align-items: center;
+                                                                            justify-content: center;
+                                                                          ">
+                        <iconify-icon icon="lucide:check-circle-2"
+                            style="font-size: 16px; color: #22c55e"></iconify-icon>
+                    </div>
+                </div>
+                <div>
+                    <div class="toast-text-primary">Movie deleted</div>
+                    <div class="toast-text-secondary">
+                        The movie was removed from your collection.
+                    </div>
+                </div>
+            </div>
+
+            <header class="top-bar">
+                <div class="search-container">
+                    <div class="search-icon">
+                        <div style="
+                          width: 20px;
+                          height: 20px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                        ">
+                            <iconify-icon icon="lucide:search"
+                                style="font-size: 20px; color: currentColor"></iconify-icon>
+                        </div>
+                    </div>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search watchlist by title..."
+                        oninput="handleSearch()" />
+                </div>
+
+                <div class="user-actions">
+                    <div class="user-profile" id="profile" data-media-type="banani-button"></div>
+                </div>
+            </header>
+
+            <div class="section-header">
+                <h1 class="section-title">Watchlist</h1>
+                <div style="font-size: 14px; color: var(--text-muted)" id="collectionCount"></div>
+            </div>
+
+            <div class="watchlist-table-wrapper">
+                <div class="watchlist-header-row">
+                    <div>#</div>
+                    <div>Title</div>
+                    <div>Status</div>
+                    <div>Rating</div>
+                    <div>Notes</div>
+                    <div style="text-align: right">Actions</div>
+                </div>
+
+                <div id="watchlistContainer"></div>
+            </div>
+        </main>
+
+        <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+        <script src="../script/watchlist.js"></script>
+</body>
+
+</html>

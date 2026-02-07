@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FilmStack Dashboard</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <div class="ambient-glow"></div>
+        <div class="ambient-glow-2"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar"></aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-container">
+                    <div class="search-icon">
+                        <div style="
+                          width: 20px;
+                          height: 20px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                        ">
+                            <iconify-icon icon="lucide:search"
+                                style="font-size: 20px; color: currentColor"></iconify-icon>
+                        </div>
+                    </div>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search movies by title..."
+                        oninput="handleSearch()" />
+                </div>
+
+                <div class="user-actions">
+                    <button class="btn-primary" data-media-type="banani-button" onclick="addMovie()">
+                        <div style="
+                          width: 18px;
+                          height: 18px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                        ">
+                            <iconify-icon icon="lucide:plus" style="font-size: 18px; color: white"></iconify-icon>
+                        </div>
+                        Add Movie
+                    </button>
+                    <div class="user-profile" id="profile" data-media-type="banani-button"></div>
+                </div>
+            </header>
+
+            <div class="section-header" id="collectionCount">
+                <h1 class="section-title">Discover</h1>
+            </div>
+
+            <div class="movie-grid" id="movieContainer"></div>
+        </main>
+    </div>
+
+    <div id="movieModal"></div>
+
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <script src="../script/dashboard.js"></script>
+</body>
+
+</html>
