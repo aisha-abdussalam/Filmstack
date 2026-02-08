@@ -22,7 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Enable CORS
 app.use(cors({
-    origin: "http://127.0.0.1:5500",
+    origin: "https://filmstack.vercel.app/",
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true
 }))
 
