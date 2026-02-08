@@ -5,7 +5,7 @@ const API_BASE_URL = window.location.hostname === "localhost" || window.location
     : "https://filmstack.onrender.com";
     
 const fetchSidebar = async () => {
-    const response = await fetch("http://127.0.0.1:5500/html/sidebar.html")
+    const response = await fetch("/html/sidebar.html")
 
     const result = await response.text()
     document.getElementById("sidebar").innerHTML = result
@@ -16,7 +16,7 @@ const fetchSidebar = async () => {
 fetchSidebar();
 
 const fetchAddMovieModal = async () => {
-    const response = await fetch("http://127.0.0.1:5500/html/addMovieModal.html");
+    const response = await fetch("/html/addMovieModal.html");
 
     const result = await response.text();
     document.getElementById("movieModal").innerHTML = result;

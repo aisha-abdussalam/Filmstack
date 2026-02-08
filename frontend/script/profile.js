@@ -1,5 +1,5 @@
 const fetchSidebar = async () => {
-    const response = await fetch("http://127.0.0.1:5500/html/sidebar.html")
+    const response = await fetch("/html/sidebar.html")
 
     const result = await response.text()
     document.getElementById("sidebar").innerHTML = result
@@ -172,7 +172,7 @@ function editProfile() {
 
 const logout = async () => {
     try {
-        const response = await fetch("http://127.0.0.1:5001/auth/logout", {
+        const response = await fetch(`${API_BASE_URL}/auth/logout`, {
             method: "POST"
         });
         const result = await response.json();
