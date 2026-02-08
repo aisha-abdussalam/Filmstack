@@ -26,7 +26,7 @@ const fetchAddMovieModal = async () => {
 
 function setupSidebarListeners() {
     document.getElementById("goToBrowse").addEventListener("click", () => {
-        window.location.href = "../html/index.html"
+        window.location.href = "../index.html"
     });
 
     document.getElementById("goToMovies").addEventListener("click", () => {
