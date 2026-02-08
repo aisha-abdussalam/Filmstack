@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Enable CORS
 app.use(cors({
-    origin: "https://filmstack.vercel.app/",
+    origin: "https://filmstack.vercel.app",
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true
 }))
