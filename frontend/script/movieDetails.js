@@ -1,5 +1,9 @@
 const movieId = new URLSearchParams(window.location.search).get("id");
 
+const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://127.0.0.1:5001"
+    : "https://filmstack.onrender.com";
+    
 const fetchSidebar = async () => {
     const response = await fetch("http://127.0.0.1:5500/html/sidebar.html")
 
@@ -42,8 +46,8 @@ const fetchMovieDetails = async () => {
         const details = document.getElementById("details")
 
         const [movieRes, userRes] = await Promise.all([
-            fetch(`http://127.0.0.1:5001/movies/${movieId}`),
-            fetch("http://127.0.0.1:5001/auth/me", { credentials: "include" })
+            fetch(`${API_BASE_URL}/movies/${movieId}`),
+            fetch(`${API_BASE_URL}/auth/me`, { credentials: "include" })
         ])
 
         const movieData = await movieRes.json();
@@ -216,7 +220,7 @@ function back() {
 
 const addToWatchlist = async () => {
     try {
-        const response = await fetch("http://127.0.0.1:5001/watchlist", {
+        const response = await fetch(`${API_BASE_URL}/watchlist`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },

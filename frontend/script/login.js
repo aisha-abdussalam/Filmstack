@@ -1,3 +1,7 @@
+const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://127.0.0.1:5001"
+    : "https://filmstack.onrender.com";
+
 const loginButton = document.getElementById("loginButton");
 loginButton.addEventListener("click", async () => {
     const email = document.getElementById("email").value;
@@ -8,7 +12,7 @@ loginButton.addEventListener("click", async () => {
     errorMessage.style.display = "none"
 
     try {
-        const response = await fetch("http://127.0.0.1:5001/auth/login", {
+        const response = await fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },

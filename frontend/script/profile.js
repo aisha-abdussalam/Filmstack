@@ -25,13 +25,16 @@ function setupSidebarListeners() {
     document.getElementById("genresCheckboxes").style.display = "none"
 }
 
+const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://127.0.0.1:5001"
+    : "https://filmstack.onrender.com";
 
 const fetchUser = async () => {
     try {
         const [watchlistRes, userRes, movieRes] = await Promise.all([
-            fetch("http://127.0.0.1:5001/watchlist", { credentials: 'include' }),
-            fetch("http://127.0.0.1:5001/auth/me", { credentials: 'include' }),
-            fetch("http://127.0.0.1:5001/movies")
+            fetch(`${API_BASE_URL}/watchlist`, { credentials: 'include' }),
+            fetch(`${API_BASE_URL}/auth/me`, { credentials: 'include' }),
+            fetch(`${API_BASE_URL}/movies`)
         ]);
 
         const watchlistData = await watchlistRes.json();

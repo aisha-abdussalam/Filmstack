@@ -1,8 +1,12 @@
 const watchlistId = new URLSearchParams(window.location.search).get("id");
 const ALL_STATUSES = ["PLANNED", "COMPLETED", "WATCHING", "DROPPED"];
 
+const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://127.0.0.1:5001"
+    : "https://filmstack.onrender.com";
+
 const fetchWatchlist = async () => {
-    const response = await fetch("http://127.0.0.1:5001/watchlist",
+    const response = await fetch(`${API_BASE_URL}/watchlist`,
         { credentials: 'include' }
     );
 
@@ -145,7 +149,7 @@ const editWatchlist = async () => {
         console.log(rating);
         console.log(notes);
 
-        const response = await fetch(`http://127.0.0.1:5001/watchlist/${watchlistId}`, {
+        const response = await fetch(`${API_BASE_URL}/watchlist/${watchlistId}`, {
             method: 'PUT',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },

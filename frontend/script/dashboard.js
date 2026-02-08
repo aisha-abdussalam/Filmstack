@@ -22,13 +22,17 @@ const fetchAddMovieModal = async () => {
 
 fetchAddMovieModal();
 
+const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://127.0.0.1:5001"
+    : "https://filmstack.onrender.com";
+
 const fetchMovies = async () => {
     const movieContainer = document.getElementById("movieContainer");
 
     try {
         const [movieRes, userRes] = await Promise.all([
-            fetch("http://127.0.0.1:5001/movies"),
-            fetch("http://127.0.0.1:5001/auth/me", { credentials: 'include' })
+            fetch(`${API_BASE_URL}/movies`),
+            fetch(`${API_BASE_URL}/auth/me`, { credentials: 'include' })
         ]);
 
         const movieData = await movieRes.json();
@@ -130,7 +134,7 @@ const handleSearch = async () => {
     try {
         const searchTerm = document.getElementById("searchInput").value
 
-        const response = await fetch(`http://127.0.0.1:5001/movies?search=${searchTerm}`);
+        const response = await fetch(`${API_BASE_URL}/movies?search=${searchTerm}`);
 
         const result = await response.json();
         console.log(result);
@@ -397,7 +401,7 @@ function setupModalLogic() {
         }
 
         try {
-            const response = await fetch("http://127.0.0.1:5001/movies", {
+            const response = await fetch(`${API_BASE_URL}/movies`, {
                 method: 'POST',
                 credentials: 'include',
                 body: formData

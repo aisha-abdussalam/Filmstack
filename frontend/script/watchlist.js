@@ -1,3 +1,7 @@
+const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://127.0.0.1:5001"
+    : "https://filmstack.onrender.com";
+    
 const fetchSidebar = async () => {
     const response = await fetch("http://127.0.0.1:5500/html/sidebar.html")
 
@@ -45,8 +49,8 @@ const displayWatchlist = async () => {
     document.getElementById("watchlistContainer").innerHTML = "";
 
     const [watchlistRes, userRes] = await Promise.all([
-        fetch("http://127.0.0.1:5001/watchlist", { credentials: 'include' }),
-        fetch("http://127.0.0.1:5001/auth/me", { credentials: 'include' })
+        fetch(`${API_BASE_URL}/watchlist`, { credentials: 'include' }),
+        fetch(`${API_BASE_URL}auth/me`, { credentials: 'include' })
     ]);
 
     const watchlistData = await watchlistRes.json();
@@ -156,7 +160,7 @@ function setupEventListeners() {
             console.log(watchlistId);
 
             try {
-                const response = await fetch(`http://127.0.0.1:5001/watchlist/${watchlistId}`, {
+                const response = await fetch(`${API_BASE_URL}/watchlist/${watchlistId}`, {
                     method: 'DELETE',
                     credentials: 'include',
                 })
@@ -188,7 +192,7 @@ function setupEventListeners() {
 const handleSearch = async () => {
     const searchTerm = document.getElementById("searchInput").value
 
-    const response = await fetch(`http://127.0.0.1:5001/watchlist?search=${searchTerm}`, { credentials: 'include' });
+    const response = await fetch(`${API_BASE_URL}/watchlist?search=${searchTerm}`, { credentials: 'include' });
 
     const result = await response.json();
     watchlist = result.data.watchlist

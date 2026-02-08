@@ -1,9 +1,12 @@
 const movieId = new URLSearchParams(window.location.search).get("id");
 const ALL_GENRES = ["Action", "Drama", "Sci-Fi", "Thriller", "Comedy", "Horror", "Mystery", "Romance", "Biography", "History"];
+const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://127.0.0.1:5001"
+    : "https://filmstack.onrender.com";
 
 const fetchMovieDetails = async () => {
     try {
-        const response = await fetch("http://127.0.0.1:5001/movies");
+        const response = await fetch(`${API_BASE_URL}/movies`);
 
         const result = await response.json();
         const movies = result.data.result;
@@ -197,7 +200,7 @@ const editMovieButton = async () => {
     }
 
     try {
-        const response = await fetch(`http://127.0.0.1:5001/movies/${movieId}`, {
+        const response = await fetch(`${API_BASE_URL}/movies/${movieId}`, {
             method: 'PUT',
             credentials: 'include',
             body: formData
