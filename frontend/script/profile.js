@@ -184,8 +184,4 @@ const logout = async () => {
     }
 }
 
-document.getElementById("profile").addEventListener("click", () => {
-    window.location.href = "../html/profile.html";
-});
-
 fetchUser()
