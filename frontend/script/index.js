@@ -20,8 +20,6 @@ const fetchAddMovieModal = async () => {
     setupModalLogic();
 }
 
-fetchAddMovieModal();
-
 const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
     ? "http://127.0.0.1:5001"
     : "https://filmstack.onrender.com";
@@ -175,6 +173,8 @@ const handleSearch = async () => {
 }
 
 const addMovie = () => {
+    fetchAddMovieModal();
+
     // window.location.href = "../html/addMovie.html";
     document.getElementById("backdrop").style.display = "block";
     document.getElementById("drawer").style.display = "block";

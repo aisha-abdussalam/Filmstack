@@ -284,6 +284,8 @@ function handleSearch() {
 }
 
 const addMovie = () => {
+    fetchAddMovieModal();
+
     // window.location.href = "../html/addMovie.html";
     document.getElementById("backdrop").style.display = "block";
     document.getElementById("drawer").style.display = "block";
@@ -445,8 +447,6 @@ const fetchAddMovieModal = async () => {
 
     setupModalLogic();
 }
-
-fetchAddMovieModal();
 
 function back() {
     window.location.href = "../index.html"
