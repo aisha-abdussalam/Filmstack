@@ -79,19 +79,6 @@ const fetchUser = async () => {
 
         let userHTML = "";
 
-        document.getElementById("profile").innerHTML = `
-            <div style="text-align: right">
-                <div style="font-size: 14px; font-weight: 600; color: white">
-                    ${user.name}
-                </div>
-                <div style="font-size: 12px; color: var(--text-muted)">
-                    @${user.username || ""}
-                </div>
-            </div>
-            <img src="${user.profileUrl}"
-                class="avatar" alt="User" />
-        `
-
         userHTML = `
             <!-- Profile Header -->
             <div class="profile-header">
