@@ -26,7 +26,7 @@ loginButton.addEventListener("click", async () => {
             showError(messageToShow)
         } else {
             console.log("Login successful");
-            window.location.href = "../html/dashboard.html"
+            window.location.href = "../html/index.html"
         }
     } catch (error) {
         showError("Network issue.There was problem connecting with the server")

@@ -15,7 +15,7 @@ fetchSidebar();
 
 function setupSidebarListeners() {
     document.getElementById("goToBrowse").addEventListener("click", () => {
-        window.location.href = "../html/dashboard.html"
+        window.location.href = "../html/index.html"
     });
 
     document.getElementById("goToMovies").addEventListener("click", () => {
@@ -36,7 +36,7 @@ function setupSidebarListeners() {
         if (currentPath.includes('watchlist.html') && item.id === 'goToWatchlist') {
             item.classList.add('active');
         }
-        else if (currentPath.includes('dashboard.html') && item.id === 'goToBrowse') {
+        else if (currentPath.includes('index.html') && item.id === 'goToBrowse') {
             item.classList.add('active');
         }
         else if (currentPath.includes('movies.html') && item.id === 'goToMovies') {

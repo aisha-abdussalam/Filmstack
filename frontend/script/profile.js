@@ -11,7 +11,7 @@ fetchSidebar();
 
 function setupSidebarListeners() {
     document.getElementById("goToBrowse").addEventListener("click", () => {
-        window.location.href = "../html/dashboard.html"
+        window.location.href = "../html/index.html"
     });
 
     document.getElementById("goToMovies").addEventListener("click", () => {

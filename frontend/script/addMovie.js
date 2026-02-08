@@ -127,7 +127,7 @@ addMovieButton.addEventListener("click", async () => {
             showError(messageToShow)
         } else {
             console.log("Registration successful", result);
-            window.location.href = "../html/dashboard.html"
+            window.location.href = "../html/index.html"
         }
     } catch (error) {
         showError("Network issue.There was problem connecting with the server");
@@ -140,9 +140,9 @@ addMovieButton.addEventListener("click", async () => {
 });
 
 function back() {
-    window.location.href = "../html/dashboard.html"
+    window.location.href = "../html/index.html"
 }
 
 document.getElementById("closeBtn").addEventListener("click", () => {
-    window.location.href = "../html/dashboard.html"
+    window.location.href = "../html/index.html"
 });
