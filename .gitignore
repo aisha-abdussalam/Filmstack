@@ -1,7 +1,6 @@
 # Ignore dependencies
 node_modules/
 
-# Ignore environment variables (passwords/API keys)
 .env
 
 # Ignore OS-specific files

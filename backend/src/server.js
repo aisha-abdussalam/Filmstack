@@ -36,11 +36,11 @@ app.use("/watchlist", watchlistRoutes);
 //     res.json({message: "hello world"})
 // })
 
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on PORT ${PORT}`);
-})
+});
 
 process.on("unhandledRejection", (err) => {
     console.error("unhandled Rejection", err);

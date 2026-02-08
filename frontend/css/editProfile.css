@@ -116,6 +116,34 @@ html {
     max-height: 70vh;
 }
 
+/* Target the sidebar or the specific scrollable container */
+.modal-body::-webkit-scrollbar,
+.dashboard-layout::-webkit-scrollbar {
+    width: 6px;
+    /* Very thin */
+}
+
+.modal-body::-webkit-scrollbar-track,
+.dashboard-layout::-webkit-scrollbar-track {
+    background: transparent;
+    /* Makes the track invisible */
+}
+
+.modal-body::-webkit-scrollbar-thumb,
+.dashboard-layout::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    /* Subtle white tint */
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Glass edge effect */
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover,
+.dashboard-layout::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-purple);
+    /* Glows when you actually touch it */
+}
+
 .avatar-section {
     display: flex;
     flex-direction: column;
