@@ -50,7 +50,7 @@ const displayWatchlist = async () => {
 
     const [watchlistRes, userRes] = await Promise.all([
         fetch(`${API_BASE_URL}/watchlist`, { credentials: 'include' }),
-        fetch(`${API_BASE_URL}auth/me`, { credentials: 'include' })
+        fetch(`${API_BASE_URL}/auth/me`, { credentials: 'include' })
     ]);
 
     const watchlistData = await watchlistRes.json();
