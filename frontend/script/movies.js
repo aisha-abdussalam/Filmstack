@@ -9,17 +9,6 @@ const fetchSidebar = async () => {
 
 fetchSidebar();
 
-const fetchAddMovieModal = async () => {
-    const response = await fetch("/html/addMovie.html");
-
-    const result = await response.text();
-    document.getElementById("movieModal").innerHTML = result;
-
-    setupModalLogic();
-}
-
-fetchAddMovieModal();
-
 function setupSidebarListeners() {
     document.getElementById("goToBrowse").addEventListener("click", () => {
         window.location.href = "../index.html"
@@ -447,6 +436,17 @@ function setupModalLogic() {
         window.location.href = "../index.html"
     });
 }
+
+const fetchAddMovieModal = async () => {
+    const response = await fetch("/html/addMovie.html");
+
+    const result = await response.text();
+    document.getElementById("movieModal").innerHTML = result;
+
+    setupModalLogic();
+}
+
+fetchAddMovieModal();
 
 function back() {
     window.location.href = "../index.html"
