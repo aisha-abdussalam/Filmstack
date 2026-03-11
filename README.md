@@ -3,9 +3,13 @@ FilmStack is a high-performance, full-stack movie management system designed to 
 
 Core Features:
 *Persistent Data Management: Utilizes PostgreSQL and Prisma ORM to handle complex relational data, replacing localStorage with a persistent server-side state.
+
 *Professional Authentication: Implements a secure JWT-based authentication flow using HttpOnly cookies to protect against XSS and CSRF vulnerabilities.
+
 *Advanced Querying: Supports multi-criteria filtering, title-based search, and automated pagination for seamless data retrieval.
+
 *Data Integrity: Employs Zod for strict schema validation and soft-delete logic to maintain historical data while updating the user interface.
+
 *Optimized Media: Leverages Cloudinary for efficient image storage and high-speed delivery of movie assets.
 
 Technical Stack
