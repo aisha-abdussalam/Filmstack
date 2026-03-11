@@ -2,7 +2,7 @@ FILMSTACK
 
 FilmStack is a high-performance, full-stack movie management system designed to move beyond volatile client-side storage toward a robust, production-ready architecture. The application features a custom-built RESTful API that facilitates secure user authentication, persistent data management, and an optimized discovery interface. By integrating a relational database with modern backend logic, the project demonstrates a complete transition from local state to a scalable, cloud-deployed environment.
 
-Core Features:
+🚀 Core Features:
 
 *Persistent Data Management: Utilizes PostgreSQL and Prisma ORM to handle complex relational data, replacing localStorage with a persistent server-side state.
 
