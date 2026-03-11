@@ -14,7 +14,7 @@ Core Features:
 
 *Optimized Media: Leverages Cloudinary for efficient image storage and high-speed delivery of movie assets.
 
-Technical Stack
+🛠 Technical Stack
 
 Layer            Technology
 
@@ -31,6 +31,12 @@ Deployment      Vercel (Frontend), Render (Backend)
 Deployment & Infrastructure
 
 The application is architected for cross-platform stability, utilizing a multi-cloud deployment strategy. The frontend is hosted on Vercel, communicating with a Render-hosted backend through a strictly configured CORS policy. Environment-specific variables and secure proxy settings ensure that the production handshake remains stable and secure, even across different hosting domains.
+
+📷 Live Demo
+
+Frontend: https://filmstack.vercel.app/
+
+Backend API: https://filmstack.onrender.com
 
 Getting Started
 
