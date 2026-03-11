@@ -42,7 +42,7 @@ Getting Started
 
 Clone the repository:
 
-git clone https://github.com/your-username/filmstack.git
+git clone https://github.com/aisha-abdussalam/Filmstack.git
 
 Install dependencies:
 
